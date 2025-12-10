@@ -17,11 +17,20 @@ class Methods:
    
    @staticmethod
    @allure.step('Авторизовать курьера')
-   def login_courier(body):
+   def login_courier(login, password):
+      body = {
+            "login": login,
+            "password": password
+        }
       return requests.post(Url.login_courier, json=body)
    
    @staticmethod
    @allure.step('Получить список заказов')
    def get_list_order():
       return requests.get(Url.order)
+   
+   @staticmethod 
+   @allure.step('Удалить курьера')
+   def delete_courier(id_courier):
+      return requests.delete(f"{Url.courier}/{id_courier}")
     

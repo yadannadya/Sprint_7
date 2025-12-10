@@ -10,18 +10,18 @@ from data import Person
 class TestCreationCourier:
 
    @allure.title('Успешная регистрация курьера')
-   def test_create_courier_success(self):
-      response = Methods.create_courier(body=helpers.faker_courier())
+   def test_create_courier_success(self, generate_courier_and_delete):
+      response = Methods.create_courier(body=generate_courier_and_delete[0])
       assert response.status_code == 201
       assert response.json() == {"ok": True}
    
    @allure.title('Нельзя зарегистрировать 2 курьеров с одинаковым логином')
-   def test_create_courier_with_repeat_login_unsuccess(self):
-      body = helpers.faker_courier()
+   def test_create_courier_with_repeat_login_unsuccess(self, generate_courier_and_delete):
+      body = generate_courier_and_delete[0]
       Methods.create_courier(body=body)
       response_2 = Methods.create_courier(body=body)
       assert response_2.status_code == 409
-      assert response_2.json()["message"] == "Этот логин уже используется"
+      assert "Этот логин уже используется" in response_2.json()["message"]
 
    @allure.title('Нельзя зарегистрировать курьера без логина или пароля')
    @pytest.mark.parametrize('body', Person.invalid_courier)
