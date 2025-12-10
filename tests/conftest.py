@@ -3,10 +3,9 @@ from methods.methods import Methods
 import helpers
 
 
-@pytest.fixture #для регитрации
+@pytest.fixture
 def generate_courier_and_delete():
     courier = helpers.faker_courier()
-    #Methods.create_courier(body=body)
     login = courier["login"]
     password = courier["password"]
     
