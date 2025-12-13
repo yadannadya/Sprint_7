@@ -34,3 +34,20 @@ class Methods:
    def delete_courier(id_courier):
       return requests.delete(f"{Url.courier}/{id_courier}")
     
+   @staticmethod 
+   @allure.step('Получить заказ по его номеру')
+   def get_order_by_track(track):
+      return requests.get(f"{Url.track}{track}")
+   
+
+   @staticmethod 
+   @allure.step('Удалить заказ')
+   def delete_order(track):
+      return requests.put(f"{Url.delete_order}?track={track}")
+   
+
+   @staticmethod 
+   @allure.step('Принять заказ')
+   def accept_orders(id_order, id_courier):
+      return requests.put(f"{Url.accept_order}{id_order}?courierId={id_courier}")
+      

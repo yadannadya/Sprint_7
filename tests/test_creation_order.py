@@ -11,3 +11,4 @@ class TestCreationOrder:
         response = Methods.create_order(body=info)
         assert response.status_code == 201
         assert type(response.json()["track"]) == int
+        Methods.delete_order(response.json()["track"])

@@ -1,7 +1,6 @@
 
 import pytest
 from methods.methods import Methods
-import helpers
 import allure
 
 from data import Person
@@ -19,9 +18,9 @@ class TestCreationCourier:
    def test_create_courier_with_repeat_login_unsuccess(self, generate_courier_and_delete):
       body = generate_courier_and_delete[0]
       Methods.create_courier(body=body)
-      response_2 = Methods.create_courier(body=body)
-      assert response_2.status_code == 409
-      assert "Этот логин уже используется" in response_2.json()["message"]
+      response = Methods.create_courier(body=body)
+      assert response.status_code == 409
+      assert  response.json()["message"] == "Этот логин уже используется"
 
    @allure.title('Нельзя зарегистрировать курьера без логина или пароля')
    @pytest.mark.parametrize('body', Person.invalid_courier)

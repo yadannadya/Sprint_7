@@ -52,3 +52,6 @@ class Person:
        invalid_courier = [courier_without_password, courier_without_login]
 
        invalid_login = [("", "ninja"), ("1234", "")]
+       track_none = ""
+       track_invalid = "13527899"
+       invalid_accept = [("", "2345"), ("1234", "")]
